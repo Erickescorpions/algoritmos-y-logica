@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#define LETTERS_SIZE 5
+
 void print_matrix(char matrix[5][5]);
 FILE *open_file(const char *name, char *mode);
 char *read_text_from_file(FILE *file);
@@ -10,6 +12,7 @@ char *read_file(const char *file_name);
 void write_file(const char *file_name, const char *data);
 
 void get_letters(char letters[5]);
+void sort_alphabetically(char letters[5], int n);
 
 void encode_file(char matrix[5][5]);
 char *encode(char matrix[5][5], char letters[5], char *data);
@@ -76,6 +79,7 @@ int main()
 
     return 0;
 }
+
 void print_matrix(char matrix[5][5])
 {
     for (int i = 0; i < 5; i++)
@@ -178,10 +182,23 @@ void get_letters(char letters[5])
     }
 }
 
+void sort_alphabetically(char letters[5], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (letters[j] > letters[j + 1]) {
+                char aux = letters[j];
+                letters[j] = letters[j + 1];
+                letters[j + 1] = aux;
+            }
+        }
+    }
+}
+
 void encode_file(char matrix[5][5])
 {
     char letters[5];
     get_letters(letters);
+    sort_alphabetically(letters, 5);
 
     char file_name[50];
     printf("Ingresa el nombre del archivo donde se encuentra tu cadena sin codificar: ");
@@ -244,6 +261,7 @@ void decode_file(char matrix[5][5])
 {
     char letters[5];
     get_letters(letters);
+    sort_alphabetically(letters, 5);
 
     char file_name[50];
     puts("Ingresa el nombre del archivo donde se encuentra tu cadena codificada: ");
