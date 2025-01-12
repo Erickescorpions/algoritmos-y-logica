@@ -182,10 +182,14 @@ void get_letters(char letters[LETTERS_SIZE])
     }
 }
 
-void sort_alphabetically(char letters[LETTERS_SIZE], int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n - 1 - i; j++) {
-            if (letters[j] > letters[j + 1]) {
+void sort_alphabetically(char letters[LETTERS_SIZE], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n - 1 - i; j++)
+        {
+            if (letters[j] > letters[j + 1])
+            {
                 char aux = letters[j];
                 letters[j] = letters[j + 1];
                 letters[j + 1] = aux;
