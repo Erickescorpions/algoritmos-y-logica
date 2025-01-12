@@ -11,14 +11,14 @@ char *read_text_from_file(FILE *file);
 char *read_file(const char *file_name);
 void write_file(const char *file_name, const char *data);
 
-void get_letters(char letters[5]);
-void sort_alphabetically(char letters[5], int n);
+void get_letters(char letters[LETTERS_SIZE]);
+void sort_alphabetically(char letters[LETTERS_SIZE], int n);
 
 void encode_file(char matrix[5][5]);
-char *encode(char matrix[5][5], char letters[5], char *data);
+char *encode(char matrix[5][5], char letters[LETTERS_SIZE], char *data);
 
 void decode_file(char matrix[5][5]);
-char *decode(char matrix[5][5], char letters[5], char *data_encoded);
+char *decode(char matrix[5][5], char letters[LETTERS_SIZE], char *data_encoded);
 
 void print_menu(const char *name)
 {
@@ -158,7 +158,7 @@ void write_file(const char *file_name, const char *data)
     fclose(file);
 }
 
-void get_letters(char letters[5])
+void get_letters(char letters[LETTERS_SIZE])
 {
     puts("Ingresa 5 letras para codificar tu cadena");
 
@@ -182,7 +182,7 @@ void get_letters(char letters[5])
     }
 }
 
-void sort_alphabetically(char letters[5], int n) {
+void sort_alphabetically(char letters[LETTERS_SIZE], int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n - 1 - i; j++) {
             if (letters[j] > letters[j + 1]) {
@@ -196,9 +196,9 @@ void sort_alphabetically(char letters[5], int n) {
 
 void encode_file(char matrix[5][5])
 {
-    char letters[5];
+    char letters[LETTERS_SIZE];
     get_letters(letters);
-    sort_alphabetically(letters, 5);
+    sort_alphabetically(letters, LETTERS_SIZE);
 
     char file_name[50];
     printf("Ingresa el nombre del archivo donde se encuentra tu cadena sin codificar: ");
@@ -216,7 +216,7 @@ void encode_file(char matrix[5][5])
     write_file(file_name, data_encoded);
 }
 
-char *encode(char matrix[5][5], char encoder[5], char *data)
+char *encode(char matrix[5][5], char encoder[LETTERS_SIZE], char *data)
 {
     int size = strlen(data);
     char *data_encoded = malloc((size + 1) * 2 * sizeof(char));
@@ -259,9 +259,9 @@ char *encode(char matrix[5][5], char encoder[5], char *data)
 
 void decode_file(char matrix[5][5])
 {
-    char letters[5];
+    char letters[LETTERS_SIZE];
     get_letters(letters);
-    sort_alphabetically(letters, 5);
+    sort_alphabetically(letters, LETTERS_SIZE);
 
     char file_name[50];
     puts("Ingresa el nombre del archivo donde se encuentra tu cadena codificada: ");
@@ -279,7 +279,7 @@ void decode_file(char matrix[5][5])
     write_file(file_name, data_decoded);
 }
 
-char *decode(char matrix[5][5], char encoder[5], char *data_encoded)
+char *decode(char matrix[5][5], char encoder[LETTERS_SIZE], char *data_encoded)
 {
     int size = strlen(data_encoded);
     char *data_decoded = malloc((int)((size / 2) + 1) * sizeof(char));
@@ -290,7 +290,7 @@ char *decode(char matrix[5][5], char encoder[5], char *data_encoded)
         int row = 0;
         int col = 0;
 
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < LETTERS_SIZE; j++)
         {
             if (data_encoded[i] == encoder[j])
             {
