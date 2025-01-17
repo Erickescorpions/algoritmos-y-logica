@@ -6,40 +6,6 @@
  * En 1848 fue propuesto para n = 8 en un trabajo anonimo atribuido despues
  * a Max Bezzel. Gauss encontro 72 posibles soluciones y Glaisher probo la
  * existencia de 92 soluciones.
- *
- * PSEUDOCODIGO
- *
- * Funcion solve(board, row, col, N):
- *    Si en la columna cruzamos con una reina:
- *      regrasamos false
- *
- *    Si en la diagonal invertida encontramos una reina:
- *      regresamos false
- *
- *    Si en la diagonal encontramos una reina:
- *      regresamos false
- *
- *
- * Funcion backtrack(solutions, board, row, N):
- *    Si row = 9:
- *      agregamos solucion
- *      regresamos false
- *    end Si
- *
- *    For i = 0 hasta N:
- *      Si(solve(board, row, i, N)):
- *        board[row][i] = 'Q'
- *
- *        Si(backtrack(solutions, board, row + 1,  N)):
- *          regresamos true
- *        end Si
- *
- *        // eliminamos
- *        board[row][i] = ''
- *      end Si
- *    end For
- *
- *    return false
  */
 
 #include <stdbool.h>
